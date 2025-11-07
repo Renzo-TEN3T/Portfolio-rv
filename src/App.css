@@ -1,0 +1,598 @@
+/* ========== FUENTES Y VARIABLES ========== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+  --bg: #0f172a;       /* fondo oscuro elegante */
+  --card: #1e293b;     /* tarjetas oscuras */
+  --text: #e2e8f0;     /* texto claro */
+  --primary: #00d4ff;  /* azul tecnológico */
+  --gray: #94a3b8;
+  --radius: 12px;
+}
+
+/* ========== RESETEO GENERAL ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ========== NAVBAR ========== */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 60px;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+}
+
+.logo {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 400;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+/* ========== SECCIÓN HERO SIN DISTORSIÓN ========== */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0 220px; /* Eliminamos padding para no cortar ni distorsionar la imagen */
+}
+
+/* Imagen de fondo desvanecida (sin estirarse ni rayarse) */
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* top:0; left:0; bottom:0; right:0 simplificado */
+  background-image: url("./assets/fondohero.jpg");
+  background-size: cover;       /* se adapta sin deformarse */
+  background-position: center;  /* siempre centrada */
+  background-repeat: no-repeat;
+  filter: blur(4px) brightness(0.5);
+  z-index: 0;
+}
+
+/* Canvas de partículas encima del fondo */
+#tsparticles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Contenedor principal sin espacios innecesarios */
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Cambiado para juntar imagen + texto */
+  gap: 120px; /* Espaciado limpio entre foto y texto */
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+/* Imagen de perfil */
+.hero-image img {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid rgba(255,255,255,0.7);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+/* Texto */
+.hero-content {
+  text-align: left;
+  max-width: 550px;
+  color: #fff;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.hero-content h1 span {
+  color: var(--primary);
+}
+
+.hero-content h2 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #d0d0d0;
+  margin: 10px 0 20px;
+}
+
+/* Botones */
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 15px;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 10px 20px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: black;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+}
+
+.btn-secondary {
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+.btn-secondary:hover {
+  background: var(--primary);
+  color: black;
+}
+
+
+/* ========== ABOUT SECTION ========== */
+.about {
+  padding: 100px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg);
+}
+
+.about-container {
+  display: flex;
+  align-items: center;
+  gap: 4rem; /* Más separación entre imagen y texto */
+  max-width: 1100px;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+/* Imagen profesional (ahora cuadrada con esquinas redondeadas) */
+.about-container img {
+  width: 300px;
+  height: 300px;
+  border-radius: 20px; /* cuadrada, bordes suaves */
+  object-fit: cover;
+  border: 4px solid var(--primary);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-container img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Texto */
+.about-text {
+  max-width: 600px;
+}
+
+.about-text h2 {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.about-text p {
+  color: var(--text);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.about-text strong {
+  color: var(--primary);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem; /* equilibrio en móviles */
+  }
+
+  .about-container img {
+    width: 260px;
+    height: 260px;
+  }
+
+  .about-text h2 {
+    font-size: 2rem;
+  }
+}
+
+
+/* ========== SKILLS ========== */
+.skills {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.skills h2 {
+  font-size: 2.3rem;
+  color: var(--primary);
+}
+
+.skills-grid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 2rem;
+}
+
+.skill-card {
+  background: var(--card);
+  padding: 25px 20px;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* Íconos / Logos */
+.skill-logo {
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+}
+
+.skill-card p {
+  color: var(--text);
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* ========== PROJECTS ========== */
+.projects {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.projects h2 {
+  font-size: 2.3rem;
+  color: var(--primary);
+  margin-bottom: 2rem;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: var(--radius);
+  transition: 0.3s;
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+}
+
+.project-image {
+  width: 100%;
+  border-radius: var(--radius);
+  height: 150px;
+  object-fit: cover;
+}
+
+.project-tech {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.project-tech span {
+  background: #1e293b;
+  padding: 5px 10px;
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  color: var(--primary);
+}
+
+.btn-project {
+  margin-top: auto;
+  text-decoration: none;
+  background: var(--primary);
+  color: #000;
+  font-weight: 600;
+  padding: 10px 15px;
+  border-radius: var(--radius);
+  transition: 0.3s;
+  text-align: center;
+}
+
+.btn-project:hover {
+  transform: scale(1.05);
+}
+
+
+/* ========== CONTACTO ========== */
+.contact {
+  padding: 100px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden; /* Para que el blur no se salga */
+}
+
+.contact::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('./assets/contact.jpg') center/cover no-repeat fixed;
+  filter: blur(15px); /* 💥 Difuminado REAL */
+  transform: scale(1.1); /* Evita bordes feos del blur */
+  z-index: -1;
+}
+
+.contact * {
+  position: relative;
+  z-index: 1; /* Asegura que el texto y los inputs estén encima */
+}
+
+.contact h2 {
+  font-size: 2.2rem;
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+.contact-form {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  background: var(--card);
+  border: 1px solid var(--gray);
+  padding: 12px;
+  border-radius: var(--radius);
+  color: var(--text);
+  transition: 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.contact-form button {
+  padding: 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: var(--text);
+  transition: 0.3s;
+}
+
+.contact-form button:hover {
+  transform: translateY(-3px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .navbar {
+    padding: 15px 30px;
+  }
+}
+
+
+/* ========== FOOTER ========== */
+
+.footer {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--card);
+  color: var(--gray);
+}
+
+.footer-socials a {
+  margin: 0 10px;
+  color: var(--text);
+  transition: 0.3s;
+}
+
+.footer-socials a:hover {
+  color: var(--primary);
+  transform: scale(1.1);
+}
+
+
+
+/* ========== CERTIFICATIONS ========== */
+.certifications {
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.certifications .section-title {
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  color: var(--primary);
+}
+
+.cv-download {
+  margin-bottom: 40px;
+}
+
+/* ========== CERTIFICATIONS ========== */
+.certifications {
+  padding: 100px 20px;
+  text-align: center;
+  background-color: var(--bg);
+}
+
+.section-title {
+  font-size: 2.3rem;
+  margin-bottom: 40px;
+  color: var(--primary);
+}
+
+/* Botón CV */
+.cv-btn {
+  padding: 12px 25px;
+  font-size: 1rem;
+  border-radius: var(--radius);
+}
+.cv-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Grid tarjetas */
+.cert-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Tarjeta */
+.cert-card {
+  background: var(--card);
+  padding: 25px;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  transition: 0.3s;
+  position: relative;
+}
+.cert-card:hover {
+  transform: translateY(-5px);
+  border: 1px solid var(--primary);
+}
+
+/* Icono */
+.cert-icon {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+/* Título */
+.cert-card h3 {
+  color: var(--primary);
+  margin-bottom: 0.3rem;
+  font-size: 1.3rem;
+}
+
+/* Emisor + año */
+.cert-issuer {
+  font-size: 0.9rem;
+  color: var(--gray);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.cert-card p {
+  font-size: 1rem;
+  color: var(--text);
+}
+
+
+
+/* ===== Scroll To Top Button ===== */
+.scroll-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--primary);
+  color: var(--bg);
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 999;
+}
+
+.scroll-to-top:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+}
+
+
+
+
